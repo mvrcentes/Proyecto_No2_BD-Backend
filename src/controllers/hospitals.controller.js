@@ -35,9 +35,29 @@ hospitalsController.createHospital = async (req, res) => {
     res.json({message: "hospital creado"})
 }
 
-hospitalsController.getHospital = (req, res) => res.json({Hospital: "Hospital"})
+hospitalsController.getHospital = async (req, res) => {
+    const { data, error } = await supabase.from('hospitales').select().eq('id', req.params.id)
+    
+    res.json(data)
+}
 
-hospitalsController.updateHospital = (req, res) => res.json({message: "Hospital actualizado"})
+hospitalsController.updateHospital = async (req, res) => {
+    const { name, address, phone, email, website } = req.body
+    
+    //Validacion de datos
+    const { error, value } = HospitalSchema.validate({ name, address, phone, email, website })
+    
+    if(error) return res.json({error: error.message})
+    
+    
+    const { data, errorSupabse } = await supabase
+    .from('hospitales')
+    .update({ nombre: name, direccion: address, telefono: phone, mail: email, website: website })
+    .eq('id', req.params.id)
+    .select()
+    
+    res.json({message: "Hospital actualizado", data: data, error: errorSupabse})
+}
 
 hospitalsController.deleteHospital = (req, res) => res.json({message: "Hospital eliminado"})
 
@@ -59,9 +79,9 @@ hospitalsController.getClinicas = async (req, res) => {
     .from('hospitales')
     .select()
     .eq('tipo', 'clinica')
-
+    
     if(error) return res.json({error: error.message})
-
+    
     return res.json(data)
 }
 
@@ -71,9 +91,9 @@ hospitalsController.getLaboratorios = async (req, res) => {
     .from('hospitales')
     .select()
     .eq('tipo', 'laboratorio')
-
+    
     if(error) return res.json({error: error.message})
-
+    
     return res.json(data)
 }
 
@@ -84,9 +104,9 @@ hospitalsController.getCentrosSalud = async (req, res) => {
     .from('hospitales')
     .select()
     .eq('tipo', 'centro de salud')
-
+    
     if(error) return res.json({error: error.message})
-
+    
     return res.json(data)
 }
 
