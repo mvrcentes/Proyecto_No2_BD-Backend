@@ -1,10 +1,15 @@
 const { Router } = require('express')
 const router = Router()
 
-router.route('/')
-    .get((req, res) => res.send("Hospitales route"))
+const { getHospitals, createHospital, getHospital, updateHospital, deleteHospital } = require('../controllers/hospitals.controller')
 
-// router.route('/:id')
-    // .get((req, res) => res.send("Hospitales route"))
+router.route('/')
+    .get(getHospitals)
+    .post(createHospital)
+
+router.route('/:id')
+    .get(getHospital)
+    .put(updateHospital)
+    .delete(deleteHospital)    
 
 module.exports = router
