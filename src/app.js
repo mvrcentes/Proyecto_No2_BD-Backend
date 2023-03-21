@@ -13,7 +13,8 @@ app.use(cors())
 app.use(express.json())
 
 //routes
-app.get('/users', (req, res) => res.send("Users Routes"))
+app.use('/api/users', require('./routes/users'))
+app.use('/api/hospitales', require('./routes/hospitals'))
 
 
 
