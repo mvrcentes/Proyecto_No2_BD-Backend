@@ -77,6 +77,17 @@ const getEntidad = async (tipo) => async (req, res) => {
     return res.json(data)
 }
 
+//Query para obtener los hospitales
+hospitalsController.getHospitales = getEntidad("hospitales")
+
+//Query para obtener las clinicas
+hospitalsController.getClinicas = getEntidad("clinica")
+
+//Query para obtener los laboratorios
+hospitalsController.getLaboratorios = getEntidad("laboratorio")
+
+//Query para obtener los centros de salud
+hospitalsController.getCentrosSalud = getEntidad("centro_salud")
 
 
 
