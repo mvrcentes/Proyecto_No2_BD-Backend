@@ -1,7 +1,11 @@
-const { Router } = require('express')
+// const { Router } = require('express')
+import { Router } from 'express'
+
 const router = Router()
 
-const { getHospitals, createHospital, getHospital, updateHospital, deleteHospital } = require('../controllers/hospitals.controller')
+// const { getHospitals, createHospital, getHospital, updateHospital, deleteHospital } = require('../controllers/hospitals.controller')
+import hospitalsController from '../controllers/hospitals.controller.js'
+const { getHospitals, createHospital, getHospital, updateHospital, deleteHospital } = hospitalsController
 
 router.route('/')
     .get(getHospitals)
@@ -12,4 +16,5 @@ router.route('/:id')
     .put(updateHospital)
     .delete(deleteHospital)    
 
-module.exports = router
+// module.exports = router
+export default router

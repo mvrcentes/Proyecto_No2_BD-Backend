@@ -1,4 +1,5 @@
-const  supabase   = require('../database.js')
+// const  supabase   = require('../database.js')
+import supabase from '../database.js'
 
 const userEmployeeController = {}
 
@@ -15,4 +16,6 @@ userEmployeeController.updateUser = (req, res) => res.send('User updated')
 
 userEmployeeController.deleteUser = (req, res) => res.send('User deleted')
 
-module.exports = userEmployeeController
+// module.exports = userEmployeeController
+
+export default userEmployeeController

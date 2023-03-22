@@ -1,6 +1,8 @@
-const  supabase   = require('../database.js')
+// const supabase = require('../database.js')
+import supabase from '../database.js'
 
-const HospitalSchema = require('../models/Hospital')
+// const HospitalSchema = require('../models/Hospital')
+import HospitalSchema from '../models/Hospital.js'
 
 const hospitalsController = {}
 
@@ -61,36 +63,14 @@ hospitalsController.updateHospital = async (req, res) => {
 
 hospitalsController.deleteHospital = (req, res) => res.json({message: "Hospital eliminado"})
 
-//Query para obtener los hospitales
-hospitalsController.getHospitales = async (req, res) => {
-    const { data, error } = await supabase
-    .from('hospitales')
-    .select()
-    .eq('tipo', 'hospital')
-    
-    if(error) return res.json({error: error.message})
-    
-    return res.json(data)
-}
+//-----------------Queries para obtener los hospitales, clinicas y laboratorios-----------------//
 
-//Query para obtener las clinicas
-hospitalsController.getClinicas = async (req, res) => {
+// Funcion generadora
+const getEntidad = async (tipo) => async (req, res) => {
     const { data, error } = await supabase
     .from('hospitales')
     .select()
-    .eq('tipo', 'clinica')
-    
-    if(error) return res.json({error: error.message})
-    
-    return res.json(data)
-}
-
-//Query para obtener los laboratorios
-hospitalsController.getLaboratorios = async (req, res) => {
-    const { data, error } = await supabase
-    .from('hospitales')
-    .select()
-    .eq('tipo', 'laboratorio')
+    .eq('tipo', tipo)
     
     if(error) return res.json({error: error.message})
     
@@ -98,16 +78,7 @@ hospitalsController.getLaboratorios = async (req, res) => {
 }
 
 
-//Query para obtener los centros de salud
-hospitalsController.getCentrosSalud = async (req, res) => {
-    const { data, error } = await supabase
-    .from('hospitales')
-    .select()
-    .eq('tipo', 'centro de salud')
-    
-    if(error) return res.json({error: error.message})
-    
-    return res.json(data)
-}
 
-module.exports = hospitalsController
+
+// module.exports = hospitalsController
+export default hospitalsController

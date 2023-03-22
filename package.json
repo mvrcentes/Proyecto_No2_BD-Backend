@@ -6,6 +6,7 @@
     "name": "backend",
     "version": "1.0.0",
     "main": "index.js",
+    "type": "module",
     "repository": "git@github.com:mvrcentes/Proyecto_No2_BD-Backend.git",
     "author": "Marco Ramirez <mvrcentes@hotmail.com>",
     "license": "MIT",

@@ -1,5 +1,8 @@
-const { createClient } = require('@supabase/supabase-js')
-const Joi = require('joi')
+// const { createClient } = require('@supabase/supabase-js')
+import { createClient } from '@supabase/supabase-js'
+
+// const Joi = require('joi')
+import Joi from 'joi'
 
 const HospitalSchema = Joi.object({
     name: Joi.string().required(),
@@ -9,4 +12,6 @@ const HospitalSchema = Joi.object({
     website: Joi.string().required(),
 })
 
-module.exports = HospitalSchema
+// module.exports = HospitalSchema
+
+export default HospitalSchema
