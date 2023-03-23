@@ -8,8 +8,8 @@ const HospitalSchema = Joi.object({
     name: Joi.string().required(),
     address: Joi.string().required(),
     phone: Joi.string().required(),
-    email: Joi.string().required(),
     website: Joi.string().required(),
+    email: Joi.string().required(),
 })
 
 // module.exports = HospitalSchema
