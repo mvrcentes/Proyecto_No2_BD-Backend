@@ -28,6 +28,7 @@ app.use(express.json())
 app.use('/api/usersEmployee', routeUserEmployee)
 app.use('/api/usersPatient', routeUserPatient)
 app.use('/api/hospitales', routeHospital)
+app.use('/api/createHospital', routeHospital)
 
 
 
