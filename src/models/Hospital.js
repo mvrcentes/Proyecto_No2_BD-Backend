@@ -10,6 +10,7 @@ const HospitalSchema = Joi.object({
     phone: Joi.string().required(),
     website: Joi.string().required(),
     email: Joi.string().required(),
+    type: Joi.string().required(),
 })
 
 // module.exports = HospitalSchema

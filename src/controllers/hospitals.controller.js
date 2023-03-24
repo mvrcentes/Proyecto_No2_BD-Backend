@@ -16,7 +16,7 @@ hospitalsController.getHospitals = async (req, res) => {
 };
 
 hospitalsController.createHospital = async (req, res) => {
-    const { name, address, phone, email, website } = req.body;
+    const { name, address, phone, email, website, type } = req.body;
 
     //Validacion de datos
     const { error, value } = HospitalSchema.validate({
@@ -25,6 +25,7 @@ hospitalsController.createHospital = async (req, res) => {
         phone,
         email,
         website,
+        type
     });
     
     if (error) {
@@ -40,6 +41,7 @@ hospitalsController.createHospital = async (req, res) => {
             telefono: phone,
             mail: email,
             website: website,
+            tipo: type
         })
         .select();
 
