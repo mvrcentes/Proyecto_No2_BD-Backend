@@ -10,7 +10,8 @@ auth.signUp = async (req, res) => {
             emailRedirectTo: "ww.google.com",
         },
     })
-
+    console.log(data)
+    console.log(error)
     return res.json({ message: "Usuario creado correctamente" })
 }
 
@@ -26,13 +27,15 @@ auth.signIn = async (req, res) => {
     }
 }
 
-auth.isActive = async () => {
+auth.isActive = async (req, res) => {
     const {
         data: { user },
     } = await supabase.auth.getUser()
     if (user) {
         console.log(user.session)
+        return res.json({ message: "Usuario activo" })
     }
+    return res.json({ message: "Usuario no activo" })
 }
 
 export default auth

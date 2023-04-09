@@ -1,25 +1,23 @@
-// const supabase = require('../database.js')
 import supabase from "../database.js";
 
-// const HospitalSchema = require('../models/Hospital')
-import HospitalSchema from "../models/Hospital.js";
+import EntityScheme from "../models/Entity.js";
 
-const hospitalsController = {};
+const entitiesController = {};
 
 //Queries generales
-hospitalsController.getHospitals = async (req, res) => {
-    const { data, error } = await supabase.from("hospitales").select();
+entitiesController.getEntities = async (req, res) => {
+    const { data, error } = await supabase.from("institucion").select();
 
     if (error) return res.json({ error: error.message });
 
     return res.json(data);
 };
 
-hospitalsController.createHospital = async (req, res) => {
+entitiesController.createEntity = async (req, res) => {
     const { name, address, phone, email, website, type } = req.body;
 
     //Validacion de datos
-    const { error, value } = HospitalSchema.validate({
+    const { error, value } = EntityScheme.validate({
         name,
         address,
         phone,
@@ -34,7 +32,7 @@ hospitalsController.createHospital = async (req, res) => {
     }
 
     const { data, errorSupabse } = await supabase
-        .from("hospitales")
+        .from("institucion")
         .insert({
             nombre: name,
             direccion: address,
@@ -47,10 +45,10 @@ hospitalsController.createHospital = async (req, res) => {
 
     console.log(errorSupabse);
     console.log(data);
-    res.json({ message: "hospital creado" });
+    res.json({ message: "Entidad creada" });
 };
 
-hospitalsController.getHospital = async (req, res) => {
+entitiesController.getEntity = async (req, res) => {
     const { data, error } = await supabase
         .from("hospitales")
         .select()
@@ -59,11 +57,11 @@ hospitalsController.getHospital = async (req, res) => {
     res.json(data);
 };
 
-hospitalsController.updateHospital = async (req, res) => {
+entitiesController.updateEntity = async (req, res) => {
     const { name, address, phone, email, website } = req.body;
 
     //Validacion de datos
-    const { error, value } = HospitalSchema.validate({
+    const { error, value } = EntityScheme.validate({
         name,
         address,
         phone,
@@ -92,7 +90,7 @@ hospitalsController.updateHospital = async (req, res) => {
     });
 };
 
-hospitalsController.deleteHospital = (req, res) =>
+entitiesController.deleteEntity = (req, res) =>
     res.json({ message: "Hospital eliminado" });
 
 //-----------------Queries para obtener los hospitales, clinicas y laboratorios-----------------//
@@ -110,16 +108,16 @@ const getEntidad = async (tipo) => async (req, res) => {
 };
 
 //Query para obtener los hospitales
-hospitalsController.getHospitales = getEntidad("hospitales");
+entitiesController.getHospitales = getEntidad("hospitales");
 
 //Query para obtener las clinicas
-hospitalsController.getClinicas = getEntidad("clinica");
+entitiesController.getClinicas = getEntidad("clinica");
 
 //Query para obtener los laboratorios
-hospitalsController.getLaboratorios = getEntidad("laboratorio");
+entitiesController.getLaboratorios = getEntidad("laboratorio");
 
 //Query para obtener los centros de salud
-hospitalsController.getCentrosSalud = getEntidad("centro_salud");
+entitiesController.getCentrosSalud = getEntidad("centro_salud");
 
-// module.exports = hospitalsController
-export default hospitalsController;
+// module.exports = entitiesController
+export default entitiesController;

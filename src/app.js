@@ -10,6 +10,8 @@ import routeUserEmployee from './routes/usersEmployee.js'
 
 import routeUserPatient from './routes/usersPatient.js'
 
+import routeTreatment from './routes/treatment.js'
+
 import routeEntity from './routes/entities.js'
 
 import routeAuth from './routes/auth.js'
@@ -42,9 +44,9 @@ app.use('/api/signup', routeAuth)
 app.use('/api/usersEmployee', routeUserEmployee)
 
 app.use('/api/usersPatient', routeUserPatient)
+app.use('/api/treatment', routeTreatment)
 
 app.use('/api/entities', routeEntity)
-app.use('/api/createHospital', routeEntity)
 
 
 
