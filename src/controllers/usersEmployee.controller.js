@@ -1,11 +1,15 @@
-// const  supabase   = require('../database.js')
 import supabase from '../database.js'
 
 const userEmployeeController = {}
 
-userEmployeeController.getUsers = (req, res) => {
+userEmployeeController.getUsers = async (req, res) => {
+    const { data, error } = await supabase
+    .from('medico')
+    .select()
     
-    res.json({message: []})
+    if(error) return res.json({error: error.message})
+    
+    return res.json(data)
 }
 
 userEmployeeController.createUser = (req, res) => res.send('User created')
