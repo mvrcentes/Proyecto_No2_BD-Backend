@@ -5,9 +5,12 @@ import { createClient } from '@supabase/supabase-js'
 import Joi from 'joi'
 
 const UserEmployeeSchema = Joi.object({
+    colegiate_number: Joi.string().required(),
+    entity: Joi.string().required(),
     name: Joi.string().required(),
-    email: Joi.string().required(),
-    password: Joi.string().required(),
-    role: Joi.string().required(),
-    hospital_id: Joi.string().required(), 
+    phone: Joi.string().required(),
+    address: Joi.string().required(),
+    speciality: Joi.string().required(),
 })
+
+export default UserEmployeeSchema
