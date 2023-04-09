@@ -10,6 +10,6 @@ const PatientScheme = Joi.object({
     phone: Joi.string().required(),
     address: Joi.string().required(),
     precedents: Joi.string().required(),
-    state: Joi.string().required(),
+    status: Joi.string().required(),
 })
 
