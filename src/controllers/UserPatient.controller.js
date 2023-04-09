@@ -1,4 +1,3 @@
-// const  supabase   = require('../database.js')
 import supabase from '../database.js'
 
 const userPatientController = {}
