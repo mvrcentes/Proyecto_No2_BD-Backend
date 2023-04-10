@@ -6,7 +6,13 @@ const treatmentController = {}
 
 //Queries generales
 treatmentController.getTreatment = async (req, res) => {
-    const { data, error } = await supabase.from("tratamiento").select()
+    const { data, error } = await supabase.from("tratamiento")
+    .select(
+        `*,
+        medico (nombre), 
+        paciente (nombre), 
+        institucion (nombre)
+    `)
 
     if (error) return res.json({ error: error.message })
 
