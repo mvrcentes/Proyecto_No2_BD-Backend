@@ -2,24 +2,27 @@ import supabase from "../database.js"
 
 import TreatmentScheme from "../models/Treatment.js"
 
-const treatmentController = {}
+const incidenceController = {}
 
 //Queries generales
-treatmentController.getTreatment = async (req, res) => {
-    const { data, error } = await supabase.from("tratamiento")
-    .select(
-        `*,
-        medico (nombre), 
-        paciente (nombre), 
-        institucion (nombre)
-    `)
+incidenceController.getTreatment = async (req, res) => {
+    const { data, error } = await supabase.from("").select()
 
     if (error) return res.json({ error: error.message })
 
     return res.json(data)
 }
 
-treatmentController.putTreatment = async (req, res) => {
+incidenceController.getIncidenceJoined = async (req, res) => {
+    const { data, error } = await supabase.from("incidencias_joined").select()
+
+    if (error) return res.json({ error: error.message })
+
+    return res.json(data)
+}
+
+
+incidenceController.putTreatment = async (req, res) => {
     const {
         patient_dpi,
         doctor_colegiate_number,
@@ -54,4 +57,4 @@ treatmentController.putTreatment = async (req, res) => {
         ])
 }
 
-export default treatmentController
+export default incidenceController
