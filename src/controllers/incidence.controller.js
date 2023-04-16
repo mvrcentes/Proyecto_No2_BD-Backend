@@ -5,15 +5,7 @@ import TreatmentScheme from "../models/Treatment.js"
 const incidenceController = {}
 
 //Queries generales
-incidenceController.getTreatment = async (req, res) => {
-    const { data, error } = await supabase.from("").select()
-
-    if (error) return res.json({ error: error.message })
-
-    return res.json(data)
-}
-
-incidenceController.getIncidenceJoined = async (req, res) => {
+incidenceController.getIncidences = async (req, res) => {
     const { data, error } = await supabase.from("incidencias_joined").select()
 
     if (error) return res.json({ error: error.message })
@@ -21,6 +13,31 @@ incidenceController.getIncidenceJoined = async (req, res) => {
     return res.json(data)
 }
 
+incidenceController.getIncidenceByDPI = async (req, res) => {
+    const { dpi } = req.params
+
+    const { data, error } = await supabase
+        .from("incidencias_joined")
+        .select()
+        .eq("dpi_paciente", dpi)
+
+    if (error) return res.json({ error: error.message })
+
+    return res.json(data)
+}
+
+incidenceController.getIncidenceByID = async (req, res) => {
+    const { dpi } = req.params
+
+    const { data, error } = await supabase
+        .from("incidencias_joined")
+        .select()
+        .eq("dpi_paciente", dpi)
+
+    if (error) return res.json({ error: error.message })
+
+    return res.json(data)
+}
 
 incidenceController.putTreatment = async (req, res) => {
     const {
