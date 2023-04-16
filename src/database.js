@@ -14,7 +14,6 @@ import express from 'express'
 const supabase = createClient(process.env.VITE_SUPABASE_URL, process.env.VITE_SUPABASE_ANON_KEY)
 // const supabase = createClient(import.meta.env.SUPABASE_URL, import.meta.env.SUPABASE_ANON_KEY)
 
-console.log(supabase)
 
 export default supabase
 // module.exports = supabase
