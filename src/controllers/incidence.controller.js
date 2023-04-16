@@ -27,12 +27,13 @@ incidenceController.getIncidenceByDPI = async (req, res) => {
 }
 
 incidenceController.getIncidenceByID = async (req, res) => {
-    const { dpi } = req.params
+    const { dpi, id } = req.params
 
     const { data, error } = await supabase
         .from("incidencias_joined")
         .select()
         .eq("dpi_paciente", dpi)
+        .eq("incidencia_id", id)
 
     if (error) return res.json({ error: error.message })
 
