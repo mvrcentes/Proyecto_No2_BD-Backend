@@ -6,8 +6,8 @@ const userEmployeeController = {}
 
 userEmployeeController.getUsers = async (req, res) => {
     const { data, error } = await supabase
-    .from('medico')
-    .select()
+    .from('medico').select()
+    // .select('institucion (tipo)')
     
     if(error) return res.json({error: error.message})
     
