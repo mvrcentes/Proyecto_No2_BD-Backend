@@ -14,7 +14,21 @@ userPatientController.getUsers = async (req, res) => {
 
 userPatientController.createUser = (req, res) => res.send('User created')
 
-userPatientController.getUser = (req, res) => res.send('User')
+
+//-------
+userPatientController.getUser = async (req, res) => {
+    const { dpi } = req.params
+
+    
+
+    const { data, error } = await supabase
+    .from('paciente')
+    .select().eq("dpi", dpi)
+    
+    if(error) return res.json({error: error.message})
+    
+    return res.json(data)
+}
 
 userPatientController.updateUser = (req, res) => res.send('User updated')
 
