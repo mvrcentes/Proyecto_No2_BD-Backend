@@ -32,7 +32,7 @@ app.use(express.json())
 
 //routes
 
-app.use('/api/signup', routeAuth)
+app.use('/api/auth', routeAuth)
 
 app.use('/api/usersEmployee', routeUserEmployee)
 
@@ -43,10 +43,6 @@ app.use('/api/treatments', routeTreatments)
 app.use('/api/entities', routeEntity)
 
 app.use('/api/reports', routeReport)
-
-
-
-
 
 // module.exports = app
 export default app
