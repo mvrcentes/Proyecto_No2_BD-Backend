@@ -15,6 +15,7 @@ import routeTreatments from './routes/treatments.routes.js'
 import routeEntity from './routes/entities.routes.js'
 
 import routeReport from './routes/adminReports.routes.js'
+import routeInventory from './routes/inventoryReports.routes.js'
 
 import routeAuth from './routes/auth.routes.js'
 
@@ -43,6 +44,8 @@ app.use('/api/treatments', routeTreatments)
 app.use('/api/entities', routeEntity)
 
 app.use('/api/reports', routeReport)
+app.use('/api/inventory', routeInventory)
+
 
 // module.exports = app
 export default app
