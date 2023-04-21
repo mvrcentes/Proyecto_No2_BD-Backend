@@ -7,8 +7,10 @@ import cors from 'cors'
 import express from 'express'
 
 import routeUserEmployee from './routes/usersEmployee.routes.js'
+import routeUserEmployeeUser from './routes/usersEmployeeUser.routes.js'
 
 import routeUserPatient from './routes/usersPatient.routes.js'
+import routeDiseases from './routes/diseases.routes.js'
 import routeIncidence from './routes/incidence.routes.js'
 import routeTreatments from './routes/treatments.routes.js'
 
@@ -36,8 +38,10 @@ app.use(express.json())
 app.use('/api/auth', routeAuth)
 
 app.use('/api/usersEmployee', routeUserEmployee)
+app.use('/api/usersEmployeeUser', routeUserEmployeeUser)
 
 app.use('/api/Patients', routeUserPatient)
+app.use('/api/diseases', routeDiseases)
 app.use('/api/incidences', routeIncidence)
 app.use('/api/treatments', routeTreatments)
 

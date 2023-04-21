@@ -14,16 +14,17 @@ entitiesController.getEntities = async (req, res) => {
 };
 
 entitiesController.createEntity = async (req, res) => {
-    const { name, address, phone, email, website, type } = req.body;
+    const { id, type, name, address, email, phone, website,  } = req.body;
 
     //Validacion de datos
     const { error, value } = EntityScheme.validate({
+        id,
+        type,
         name,
         address,
-        phone,
         email,
+        phone,
         website,
-        type
     });
     
     if (error) {
@@ -31,26 +32,37 @@ entitiesController.createEntity = async (req, res) => {
         return res.json({ error: error.message });
     }
 
-    const { data, errorSupabse } = await supabase
+    try {
+        // Insert the new user into the medico table
+        const { data, errorSupabse } = await supabase
         .from("institucion")
         .insert({
+            id: id,
+            tipo: type,
             nombre: name,
             direccion: address,
+            correo: email,
             telefono: phone,
-            mail: email,
             website: website,
-            tipo: type
         })
-        .select();
 
-    console.log(errorSupabse);
-    console.log(data);
-    res.json({ message: "Entidad creada" });
+        if (error) {
+            console.error(error.message);
+            return res.json({ error: error.message });
+        }
+
+        // Return a success message if the insert was successful
+        console.log(data);
+        res.json({ message: 'Entidad creada' });
+    } catch (error) {
+        console.error(error.message);
+        return res.json({ error: error.message });
+    }
 };
 
 entitiesController.getEntity = async (req, res) => {
     const { data, error } = await supabase
-        .from("hospitales")
+        .from("institucion")
         .select()
         .eq("id", req.params.id);
 

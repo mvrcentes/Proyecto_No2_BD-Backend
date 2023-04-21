@@ -13,7 +13,7 @@ userEmployeeController.getUsers = async (req, res) => {
     return res.json(data)
 }
 
-userEmployeeController.createUser = async (req, res) => {
+userEmployeeController.createDoctor = async (req, res) => {
     const { colegiate_number, entity, name, phone, address, speciality } =
         req.body
 
@@ -32,21 +32,32 @@ userEmployeeController.createUser = async (req, res) => {
         return res.json({ error: error.message })
     }
 
-    const { data, errorSupabse } = await supabase
-        .from("medico")
-        .insert({
-            num_colegiado: colegiate_number,
-            institucion: entity,
-            nombre: name,
-            telefono: phone,
-            direccion: address,
-            especialidad: speciality,
-        })
-        .select()
+    try {
+        // Insert the new user into the medico table
+        const { data, error } = await supabase
+            .from('medico')
+            .insert({
+                num_colegiado: colegiate_number,
+                institucion: entity,
+                nombre: name,
+                telefono: phone,
+                direccion: address,
+                especialidad: speciality,
+            });
+            
 
-    console.log(errorSupabse)
-    console.log(data)
-    res.json({ message: "Medico creado" })
+        if (error) {
+            console.error(error.message);
+            return res.json({ error: error.message });
+        }
+
+        // Return a success message if the insert was successful
+        console.log(data);
+        res.json({ message: 'Medico creado' });
+    } catch (error) {
+        console.error(error.message);
+        return res.json({ error: error.message });
+    }
 }
 
 userEmployeeController.getUser = (req, res) => res.send("User")
@@ -72,6 +83,7 @@ userEmployeeController.updateUser = async (req, res) => {
     console.log("data", data)
     res.json({ message: "update user" })
 }
+
 
 userEmployeeController.deleteUser = (req, res) => res.send("User deleted")
 

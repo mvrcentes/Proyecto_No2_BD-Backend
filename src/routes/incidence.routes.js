@@ -4,11 +4,14 @@ import incidenceController from "../controllers/incidence.controller.js"
 
 const router = Router()
 
-const { getIncidences, getIncidenceByDPI, getIncidenceByID } = incidenceController
+const { getIncidences, postIncidence, getIncidenceByDPI, getIncidenceByID } = incidenceController
 
-router.route("/").get(getIncidences)
+router.route("/")
+    .get(getIncidences)
 
-router.route("/:dpi").get(getIncidenceByDPI)
+router.route("/:dpi")
+    .get(getIncidenceByDPI)
+    .post(postIncidence)
 
 router.route("/:dpi/incidence/:id").get(getIncidenceByID)
 

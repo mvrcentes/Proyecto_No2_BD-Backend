@@ -1,6 +1,7 @@
 import supabase from "../database.js"
 
 import TreatmentScheme from "../models/Treatment.js"
+import IncidenceScheme from "../models/Incidence.js"
 
 const incidenceController = {}
 
@@ -38,6 +39,55 @@ incidenceController.getIncidenceByID = async (req, res) => {
     if (error) return res.json({ error: error.message })
 
     return res.json(data)
+}
+
+incidenceController.postIncidence = async (req, res) => {
+    const { incidencia, dpi_paciente, num_colegiado, institucion, enfermedad, diagnostico, fecha } =
+        req.body
+
+    //Validacion de datos
+    const { error, value } = IncidenceScheme.validate({
+        incidencia, 
+        dpi_paciente, 
+        num_colegiado, 
+        institucion, 
+        enfermedad, 
+        diagnostico, 
+        fecha,
+    })
+
+    if (error) {
+        console.log(error.message)
+        return res.json({ error: error.message })
+    }
+
+    try {
+        // Insert the new user into the medico table
+        const { data, error } = await supabase
+            .from('incidencia')
+            .insert({
+                id: incidencia,
+                dpi_paciente: dpi_paciente,
+                num_colegiado_med: num_colegiado,
+                institucion: institucion,
+                id_enfermedad: enfermedad,
+                diagnostico: diagnostico,
+                fecha: fecha,
+            });
+
+
+        if (error) {
+            console.error(error.message);
+            return res.json({ error: error.message });
+        }
+
+        // Return a success message if the insert was successful
+        console.log(data);
+        res.json({ message: 'Incidencia creada' });
+    } catch (error) {
+        console.error(error.message);
+        return res.json({ error: error.message });
+    }
 }
 
 incidenceController.putTreatment = async (req, res) => {
